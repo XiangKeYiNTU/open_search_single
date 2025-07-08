@@ -26,39 +26,44 @@ python workflow.py <question> [image_path]
 ```
 Enter your public image URL at the placeholder `[image_path]` if your question contains an image (optional)
 
+- Or execute using the shell script `ask.sh`
+```bash
+chmod +x ask.sh
+./ask.sh
+```
+
 ---
 
 ## Example command and output
 
 ```bash
-python workflow.py "What is the best university in the country where Michelle Yeoh was born?"
+./ask.sh
 ```
 
 ```output
+Enter your question: What city did the actor in this picture die in 2024?
+Enter public image URL (or press Enter to skip): https://datasets-server.huggingface.co/cached-assets/CaraJ/MMSearch/--/f9616f150908dae99fc7fc6329e1af93b4854299/--/end2end/end2end/82/query_image/image.jpg?Expires=1751957602&Signature=OA7x2Q6mZsp73UQ23J1~bogNfCaWh-zO3v~YpD0oe7K039EVCtPwnlv7KLOe1xUxHZobmvd-Khq3oiFKqelKjfgIhsONmx6iZ0GvIsVlp-Kb~ENUty3f40xS2YBNoct5uiHZLIhGcF-LeSsSl53XZc6YHpPWanHdeoeIOgIREEoOR5bPCXPdj4Rpo9xNUysnmQi1lCVp2k7C0zKD4BvpwKvLEMKrrrRHMDgdAPE0l-Cb4zH-n1cpUwf~GJX1E4VShDUVyMmpt9tGh2f29-UpTrB26ZpGKAshFpeHC7J7iQTY7jRLI~i9~XKRDDY9gvcor9f4fXdE8sh8OMu1cKcgqA__&Key-Pair-Id=K3EI6M078Z3AC3
+[*] Running question: What city did the actor in this picture die in 2024?
+[*] With image: https://datasets-server.huggingface.co/cached-assets/CaraJ/MMSearch/--/f9616f150908dae99fc7fc6329e1af93b4854299/--/end2end/end2end/82/query_image/image.jpg?Expires=1751957602&Signature=OA7x2Q6mZsp73UQ23J1~bogNfCaWh-zO3v~YpD0oe7K039EVCtPwnlv7KLOe1xUxHZobmvd-Khq3oiFKqelKjfgIhsONmx6iZ0GvIsVlp-Kb~ENUty3f40xS2YBNoct5uiHZLIhGcF-LeSsSl53XZc6YHpPWanHdeoeIOgIREEoOR5bPCXPdj4Rpo9xNUysnmQi1lCVp2k7C0zKD4BvpwKvLEMKrrrRHMDgdAPE0l-Cb4zH-n1cpUwf~GJX1E4VShDUVyMmpt9tGh2f29-UpTrB26ZpGKAshFpeHC7J7iQTY7jRLI~i9~XKRDDY9gvcor9f4fXdE8sh8OMu1cKcgqA__&Key-Pair-Id=K3EI6M078Z3AC3
 Response: {
-  "rationale": "I need to find out the country where Michelle Yeoh was born.",
-  "knowledge_gap": "Michelle Yeoh's country of birth.",
+  "rationale": "I cannot recognize people in images, so I need to conduct a search to identify the actor known for playing Zorro.",
+  "knowledge_gap": "Identity of the actor known for playing Zorro.",
   "action": "text_search",
-  "action_param": "Michelle Yeoh country of birth"
+  "action_param": "Zorro actor 2024 death"
 }
 Response: {
-  "rationale": "Michelle Yeoh was born in Malaysia. Now I need to identify the best university in Malaysia.",
-  "knowledge_gap": "Best university in Malaysia.",
-  "action": "text_search",
-  "action_param": "best university in Malaysia 2025"
-}
-Response: {
-  "rationale": "The search results suggest multiple sources that rank Malaysian universities. The University of Malaya is frequently mentioned as one of the top institutions.",
-  "knowledge_gap": "Final confirmation of the best-ranked university in Malaysia for 2025.",
+  "rationale": "The search result indicates Alain Delon died in 2024. Since his death location is likely the home mentioned in the snippet, I should verify this information by visiting the linked article.",
+  "knowledge_gap": "The exact city where Alain Delon died.",
   "action": "visit",
-  "action_param": "https://www.timeshighereducation.com/student/best-universities/best-universities-malaysia"
+  "action_param": "https://global.chinadaily.com.cn/a/202408/18/WS66c1cf3aa31060630b923a44.html"
 }
 Response: {
-  "rationale": "The University of Malaya is listed as one of the best universities in Malaysia for 2025 according to the Times Higher Education rankings.",
+  "rationale": "The article confirms that Alain Delon passed away in Douchy, France. I now have the information needed to answer the question.",
   "knowledge_gap": "None",
   "action": "answer",
-  "action_param": "The best university in Malaysia, where Michelle Yeoh was born, is the University of Malaya according to the 2025 Times Higher Education rankings."
+  "action_param": "The actor in the picture, Alain Delon, died in the city of Douchy, France in 2024."
 }
-Final Answer: The best university in Malaysia, where Michelle Yeoh was born, is the University of Malaya according to the 2025 Times Higher Education rankings.
-Search Count: 2
+Final Answer: The actor in the picture, Alain Delon, died in the city of Douchy, France in 2024.
+Search Count: 1
+[✓] Workflow completed.
 ```
