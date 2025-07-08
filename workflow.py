@@ -8,7 +8,7 @@ from prompts import system_prompt
 from schemas import ResponseFormatter
 from search_api import get_text_search_results, get_image_search_results
 from visit_api import visit
-from utils import truncate_markdown
+from utils import truncate_markdown, summarize_web_content_by_qwen
 
 # Load .env file
 load_dotenv()
@@ -17,6 +17,11 @@ load_dotenv()
 # openai.api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
+)
+
+qwen_client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY"),
 )
 
 # get the question and image path from command line arguments
@@ -120,10 +125,13 @@ while not answer:
             continue
     elif step.action == "visit":
         raw_content = visit(step.action_param)
-        web_content = truncate_markdown(raw_content)
+        short_content = truncate_markdown(raw_content, max_tokens=20000)
+        web_summary = summarize_web_content_by_qwen(
+            step.knowledge_gap, short_content, qwen_client
+        )
         messages.append({
             "role": "user",
-            "content": "```web_content\n" + str(web_content) + "\n```"
+            "content": "Here's a summary of the requested website:\n```web_content\n" + str(web_summary) + "\n```"
         })
         continue
     elif step.action == "answer":
