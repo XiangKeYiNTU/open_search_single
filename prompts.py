@@ -27,6 +27,7 @@ Instructions:
 ```
 - If you choose to search with an image, set the "action" to "image_search" and the "action_param" to "IMAGE" if search with the input image, image URL otherwise.
 - After each action(except for "answer"), wait for the corresponding result to be returned before proceeding to the next step.
+- If you think the result of last action hasn't solved the current knowledge gap, state it in your rationale and keep the knowledge gap unchanged.
 - Search quota for each question is 5 searches, the current usage will be returned in the search result. When the quota is reached, you must set the "action" to "answer" and provide the final answer based on the information gathered so far.
 - If you choose to answer, provide a complete and concise answer based on the information you retrieved.
 - Make sure to search for updated information, the current date is {current_date}.

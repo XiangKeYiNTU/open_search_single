@@ -30,14 +30,12 @@ image_path = sys.argv[2] if len(sys.argv) > 2 else None
 if image_path:
     question_content = [
         {
-            "type": "text",
+            "type": "input_text",
             "text": question
         },
         {
-            "type": "image_url",
-            "image_url": {
-                "url": image_path
-            }
+            "type": "input_image",
+            "image_url": image_path
         }
     ]
 else:
@@ -109,7 +107,11 @@ while not answer:
             messages.append(user_message)
             continue
         else:
-            search_results = get_image_search_results(step.action_param)
+            if step.action_param == "IMAGE":
+                image_path = image_path
+            else:
+                image_path = step.action_param
+            search_results = get_image_search_results(image_path)
             result_string = json.dumps(search_results, indent=2)
             messages.append({
                 "role": "user",
