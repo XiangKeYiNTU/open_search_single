@@ -14,11 +14,12 @@ cd open_search_single
 pip install -r requirements.txt
 ```
 - Copy `.env.example` file and rename it as `.env`
-- Enter your openai api key, serpapi key, and jina api key in the `.env` file
+- Enter your openai api key, serpapi key, jina api key, and openrouter api key in the `.env` file
 ```env
 OPENAI_API_KEY="your_openai_api_key_here"
 SERP_API_KEY="your_serp_api_key_here"
 JINA_API_KEY="your_jina_api_key_here"
+OPENROUTER_API_KEY="your_openrouter_api_key_here"
 ```
 - Execute the `workflow.py` file with the following command:
 ```bash
